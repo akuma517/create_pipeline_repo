@@ -1,0 +1,3 @@
+[submodule "submodules/psoc6hal"]
+	path = submodules/psoc6hal
+	url = https://github.com/Infineon/psoc6hal.git
