@@ -64,6 +64,7 @@ jobs:
           git config --global user.name "akuma517"
           git config --global user.email "ayush.nith17@gmail.com"
           git add .
+          git rm --cached uncrustify
           git commit -m "Formatted via Github Actions"
       #Push Changes
       - name: Push changes

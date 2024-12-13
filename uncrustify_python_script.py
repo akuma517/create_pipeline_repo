@@ -5,6 +5,7 @@ import subprocess
 
 # Folder/File locations
 SOURCE_DIR = "submodules/psoc6hal"
+DEST_DIR = "beautified_code"
 UNCRUSTIFY_PATH = "/home/runner/work/create_pipeline_repo/create_pipeline_repo/uncrustify/build/uncrustify"
 CONFIG_PATH = "mystyle.cfg"
 
@@ -18,7 +19,7 @@ def find_files(base_dir, extensions):
 def run_uncrustify(files):
     """Run uncrustify on a list of files."""
     for file in files:
-        output_file = f"{file}.unc"
+        output_file = f"{DEST_DIR}/{file}.unc"
         try:
             subprocess.run(
                 [UNCRUSTIFY_PATH, "-c", CONFIG_PATH, "-f", file, "-o", output_file],
