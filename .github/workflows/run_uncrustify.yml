@@ -53,4 +53,21 @@ jobs:
         run: |
           echo "Listing files in the psoc6hal submodule:"
           ls submodules/psoc6hal/include
-        
+      
+      - name: Run Python Script
+        run: |
+          python uncrustify_python_script.py
+         
+      # Commit files
+      - name: Commit formatted files
+        run: |
+          git config --global user.name "akuma517"
+          git config --global user.email "ayush.nith17@gmail.com"
+          git add .
+          git commit -m "Formatted via Github Actions"
+      #Push Changes
+      - name: Push changes
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+         git push origin main
