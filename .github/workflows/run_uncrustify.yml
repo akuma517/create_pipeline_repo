@@ -1,0 +1,51 @@
+name: Format Code with Uncrustify using python script
+
+on: [push, pull_request]
+
+jobs:
+  format-code:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: 'true'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            git \
+            cmake \
+            gcc \
+            g++ \
+            curl \
+            automake \
+            libtool
+          
+      - name: build uncrustify library
+        env:
+          BADGE: linux
+        run: |
+          git clone https://github.com/uncrustify/uncrustify.git
+          cd uncrustify
+          mkdir build
+          cd build
+          cmake -DCMAKE_C_COMPILER=/usr/bin/gcc -DCMAKE_CXX_COMPILER=/usr/bin/g++ ..
+          cmake --build . --config Release
+      
+      # Setup Python
+      - name: Set up Python
+        # This is the version of the action for setting up Python, not the Python version.
+        uses: actions/setup-python@v5
+        with:
+          # Semantic version range syntax or exact version of a Python version
+          python-version: '3.x'
+          
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+        
