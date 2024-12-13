@@ -40,20 +40,21 @@ jobs:
       
       # Setup Python
       - name: Set up Python
-        # This is the version of the action for setting up Python, not the Python version.
         uses: actions/setup-python@v5
         with:
-          # Semantic version range syntax or exact version of a Python version
           python-version: '3.x'
-          
+
+      # Verify Python installation  
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
 
+      # Verify submodule accessibilty
       - name: List files in the submodule
         run: |
           echo "Listing files in the psoc6hal submodule:"
           ls submodules/psoc6hal/include
       
+      # Run uncrustify using python script
       - name: Run Python Script
         run: |
           python uncrustify_python_script.py
@@ -66,7 +67,8 @@ jobs:
           git add .
           git rm -f --cached uncrustify
           git commit -m "Formatted via Github Actions"
-      #Push Changes
+
+      #push changes to main
       - name: Push changes
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -19,7 +19,7 @@ def find_files(base_dir, extensions):
 def run_uncrustify(files):
     """Run uncrustify on a list of files."""
     for file in files:
-        output_file = f"{DEST_DIR}/{file}.unc"
+        output_file = f"{DEST_DIR}/{file}"
         try:
             subprocess.run(
                 [UNCRUSTIFY_PATH, "-c", CONFIG_PATH, "-f", file, "-o", output_file],
